@@ -19,7 +19,7 @@ public class UserService {
 
     public User getUserById(Integer userId) {
         logger.info("Getting user by id: " + userId);
-        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findById(userId).orElse(null);
     }
 
     public List<User> getUsers() {
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User updateUser(Integer userId, User updatedUser) {
-        User existingUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User existingUser = userRepository.findById(userId).orElse(null);
 
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setEmail(updatedUser.getEmail());
