@@ -1,0 +1,9 @@
+spring.application.name=moneyflow
+spring.datasource.url=jdbc:postgresql://localhost:5432/money_flow
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.default_schema=public
+spring.jpa.properties.hibernate.format_sql=true
