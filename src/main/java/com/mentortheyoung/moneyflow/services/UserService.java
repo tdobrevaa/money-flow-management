@@ -27,7 +27,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+    public void loginUser(String username, String rawPassword) {
+       logger.info("Attempting login for user: " + username);
+       User user = userRepository.findUserByUsername(username);
+
+        if (user == null || !passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new RuntimeException("Wrong credentials!");
+        }
     }
 }
