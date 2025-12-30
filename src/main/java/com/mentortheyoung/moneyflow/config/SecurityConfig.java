@@ -1,5 +1,6 @@
 package com.mentortheyoung.moneyflow.config;
 
+import com.mentortheyoung.moneyflow.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -8,7 +9,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -16,19 +16,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    public SecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
+    public SecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/",
+                        "/login",
+                        "/register",
+                        "/change-password",
+                        "/v3/api-docs/**").permitAll().anyRequest().authenticated())
                 .formLogin(form -> form.disable())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -37,7 +39,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }

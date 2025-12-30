@@ -1,16 +1,20 @@
 package com.mentortheyoung.moneyflow.services;
 
 import com.mentortheyoung.moneyflow.entities.User;
+import com.mentortheyoung.moneyflow.entities.UserPrincipal;
 import com.mentortheyoung.moneyflow.exceptions.WrongCredentialsException;
 import com.mentortheyoung.moneyflow.repositories.UserRepository;
 import lombok.Getter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
 
     private final UserRepository userRepository;
@@ -36,5 +40,16 @@ public class UserService {
             throw new WrongCredentialsException("Wrong credentials!");
         }
         return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByUsername(username);
+
+        if (user == null) {
+            System.out.println("User not found");
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new UserPrincipal(user);
     }
 }
