@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 @RestController
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
-        userService.loginUser(username, password);
-        return ResponseEntity.status(HttpStatus.OK).body("Login successful");
+    public ResponseEntity<User> loginUser(@RequestParam String username, @RequestParam String password) {
+        User user = userService.loginUser(username, password);
+        return ResponseEntity.ok(user);
     }
 }
