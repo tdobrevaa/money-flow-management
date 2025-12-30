@@ -4,7 +4,6 @@ import com.mentortheyoung.moneyflow.entities.User;
 import com.mentortheyoung.moneyflow.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,7 +16,7 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -32,5 +31,10 @@ public class UserController {
     public ResponseEntity<User> loginUser(@RequestParam String username, @RequestParam String password) {
         User user = userService.loginUser(username, password);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "You are logged in!";
     }
 }
