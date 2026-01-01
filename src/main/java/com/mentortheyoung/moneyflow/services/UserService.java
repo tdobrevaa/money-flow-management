@@ -5,6 +5,7 @@ import com.mentortheyoung.moneyflow.entities.UserPrincipal;
 import com.mentortheyoung.moneyflow.exceptions.WrongCredentialsException;
 import com.mentortheyoung.moneyflow.repositories.UserRepository;
 import lombok.Getter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,9 +33,8 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User loginUser(String username, String rawPassword) {
-       logger.info("Attempting login for user: " + username);
-       User user = userRepository.findUserByUsername(username);
+    public User loginUser(String username, String rawPassword, AuthenticationManager authManager) {
+        User user = userRepository.findUserByUsername(username);
 
         if (user == null || !passwordEncoder.matches(rawPassword, user.getPassword())) {
             throw new WrongCredentialsException("Wrong credentials!");
