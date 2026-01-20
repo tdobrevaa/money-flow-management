@@ -1,7 +1,9 @@
 package com.mentortheyoung.moneyflow.services;
 
 import com.mentortheyoung.moneyflow.entities.User;
+import com.mentortheyoung.moneyflow.exceptions.WrongCredentialsException;
 import com.mentortheyoung.moneyflow.repositories.UserRepository;
+import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ public class UserService {
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
 
     private final UserRepository userRepository;
+    @Getter
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -23,5 +26,15 @@ public class UserService {
         logger.info("Saving new user");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public User loginUser(String username, String rawPassword) {
+       logger.info("Attempting login for user: " + username);
+       User user = userRepository.findUserByUsername(username);
+
+        if (user == null || !passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new WrongCredentialsException("Wrong credentials!");
+        }
+        return user;
     }
 }
