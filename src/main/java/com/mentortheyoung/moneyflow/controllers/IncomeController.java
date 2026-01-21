@@ -23,4 +23,25 @@ public class IncomeController {
         Income addedIncome = incomeService.saveIncome(income, userPrincipal.getUser());
         return new ResponseEntity<>(addedIncome, HttpStatus.CREATED);
     }
+
+    @GetMapping("/user/income")
+    public ResponseEntity<Income> showIncome(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Income income = incomeService.readIncome(userPrincipal.getUser());
+
+        return new ResponseEntity<>(income, HttpStatus.OK);
+    }
+
+    @PutMapping("/user/income")
+    public ResponseEntity<Income> updateIncome(@RequestBody Income income,
+                                               @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Income updatedIncome = incomeService.updateIncome(income, userPrincipal.getUser());
+        return new ResponseEntity<>(updatedIncome, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/income")
+    public ResponseEntity<Income> deleteIncome(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        incomeService.deleteIncome(userPrincipal.getUser());
+
+        return ResponseEntity.noContent().build();
+    }
 }

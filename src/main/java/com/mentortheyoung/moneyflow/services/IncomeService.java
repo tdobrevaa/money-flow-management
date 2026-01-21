@@ -23,6 +23,25 @@ public class IncomeService {
             throw new IllegalArgumentException("Target saved money must be between 0 and total income!");
         }
 
+        //savedMoney
+
         return incomeRepository.save(income);
+    }
+
+    public Income readIncome(User user) {
+        return incomeRepository.findByUser(user);
+    }
+
+    public Income updateIncome(Income newIncome, User user) {
+        Income income = incomeRepository.findByUser(user);
+        income.setIncome(newIncome.getIncome());
+        income.setTargetSavedMoney(newIncome.getTargetSavedMoney());
+
+        return incomeRepository.save(income);
+    }
+
+    public void deleteIncome(User user) {
+        Income income = incomeRepository.findByUser(user);
+        incomeRepository.delete(income);
     }
 }

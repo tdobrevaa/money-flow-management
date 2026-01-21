@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer id;
+    private Integer id;
 
     @Getter
     @Setter
@@ -28,6 +28,11 @@ public class Income {
     @Setter
     @Column(name = "target_saved_money")
     private double targetSavedMoney;
+
+//    @Getter
+//    @Setter
+//    @Column(name = "saved_money")
+//    private double savedMoney;
 
     public Income(User user, double income, double targetSavedMoney) {
         this.user = user;
