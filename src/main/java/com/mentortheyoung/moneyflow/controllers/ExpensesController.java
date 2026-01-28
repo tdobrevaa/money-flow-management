@@ -47,4 +47,9 @@ public class ExpensesController {
         expensesService.deleteExpense(expenseId,userPrincipal.getUser());
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/balance")
+    public double getBalance(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        return expensesService.calculateBalance(userPrincipal.getUser());
+    }
 }

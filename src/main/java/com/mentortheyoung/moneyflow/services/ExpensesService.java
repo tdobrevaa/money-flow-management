@@ -1,8 +1,10 @@
 package com.mentortheyoung.moneyflow.services;
 
 import com.mentortheyoung.moneyflow.entities.Expenses;
+import com.mentortheyoung.moneyflow.entities.Income;
 import com.mentortheyoung.moneyflow.entities.User;
 import com.mentortheyoung.moneyflow.repositories.ExpensesRepository;
+import com.mentortheyoung.moneyflow.repositories.IncomeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +12,11 @@ import java.util.List;
 @Service
 public class ExpensesService {
     private final ExpensesRepository expensesRepository;
+    private final IncomeRepository incomeRepository;
 
-    public ExpensesService(ExpensesRepository expensesRepository) {
+    public ExpensesService(ExpensesRepository expensesRepository, IncomeRepository incomeRepository) {
         this.expensesRepository = expensesRepository;
+        this.incomeRepository = incomeRepository;
     }
 
     public Expenses saveExpense(Expenses expense, User user) {
@@ -48,5 +52,15 @@ public class ExpensesService {
         }
 
         expensesRepository.delete(expense);
+    }
+
+    public double calculateBalance(User user) {
+        Income income= incomeRepository.findByUser(user);
+
+        double totalExpenses = expensesRepository.findAllByUser(user)
+                .stream()
+                .mapToDouble(Expenses::getAmount)
+                .sum();
+        return income.getIncome() - totalExpenses;
     }
 }
