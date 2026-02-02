@@ -55,7 +55,7 @@ public class ExpensesService {
     }
 
     public double calculateBalance(User user) {
-        Income income= incomeRepository.findByUser(user);
+        Income income = incomeRepository.findByUser(user);
 
         double totalExpenses = expensesRepository.findAllByUser(user)
                 .stream()
