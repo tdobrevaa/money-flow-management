@@ -1,15 +1,20 @@
 package com.mentortheyoung.moneyflow.controllers;
 
+import com.mentortheyoung.moneyflow.dto.IncomeRequestDTO;
+import com.mentortheyoung.moneyflow.dto.IncomeResponseDTO;
 import com.mentortheyoung.moneyflow.entities.Income;
 import com.mentortheyoung.moneyflow.entities.UserPrincipal;
+import com.mentortheyoung.moneyflow.mappers.IncomeMapper;
 import com.mentortheyoung.moneyflow.services.IncomeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("/user/income")
 public class IncomeController {
     private final IncomeService incomeService;
 
@@ -17,31 +22,36 @@ public class IncomeController {
         this.incomeService = incomeService;
     }
 
-    @PostMapping("/user/income")
-    public ResponseEntity<Income> addIncome(@RequestBody Income income,
-                                            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    @PostMapping
+    public ResponseEntity<IncomeResponseDTO> addIncome(@RequestBody IncomeRequestDTO dto,
+                                                       @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Income income = IncomeMapper.toEntity(dto);
         Income addedIncome = incomeService.saveIncome(income, userPrincipal.getUser());
-        return new ResponseEntity<>(addedIncome, HttpStatus.CREATED);
+        return new ResponseEntity<>(IncomeMapper.toDto(addedIncome), HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/income")
-    public ResponseEntity<Income> showIncome(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        Income income = incomeService.readIncome(userPrincipal.getUser());
-
-        return new ResponseEntity<>(income, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<IncomeResponseDTO>> showIncome(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return ResponseEntity.ok(
+                incomeService.getAllIncome(userPrincipal.getUser())
+                        .stream()
+                        .map(IncomeMapper::toDto)
+                        .toList()
+        );
     }
 
-    @PutMapping("/user/income")
-    public ResponseEntity<Income> updateIncome(@RequestBody Income income,
+    @PutMapping("/{incomeId}")
+    public ResponseEntity<Income> updateIncome(@PathVariable Integer incomeId,
+                                               @RequestBody Income income,
                                                @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        Income updatedIncome = incomeService.updateIncome(income, userPrincipal.getUser());
+        Income updatedIncome = incomeService.updateIncome(incomeId, income, userPrincipal.getUser());
         return new ResponseEntity<>(updatedIncome, HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/income")
-    public ResponseEntity<Income> deleteIncome(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        incomeService.deleteIncome(userPrincipal.getUser());
-
+    @DeleteMapping("/{incomeId}")
+    public ResponseEntity<Income> deleteIncome(@PathVariable Integer incomeId,
+                                               @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        incomeService.deleteIncome(incomeId, userPrincipal.getUser());
         return ResponseEntity.noContent().build();
     }
 }

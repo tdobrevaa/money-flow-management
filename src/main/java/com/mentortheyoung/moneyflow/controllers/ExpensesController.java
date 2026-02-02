@@ -1,7 +1,10 @@
 package com.mentortheyoung.moneyflow.controllers;
 
+import com.mentortheyoung.moneyflow.dto.ExpensesRequestDTO;
+import com.mentortheyoung.moneyflow.dto.ExpensesResponseDTO;
 import com.mentortheyoung.moneyflow.entities.Expenses;
 import com.mentortheyoung.moneyflow.entities.UserPrincipal;
+import com.mentortheyoung.moneyflow.mappers.ExpensesMapper;
 import com.mentortheyoung.moneyflow.services.ExpensesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +23,20 @@ public class ExpensesController {
     }
 
     @PostMapping
-    public ResponseEntity<Expenses> addExpense(@RequestBody Expenses expenses,
-                                               @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<ExpensesResponseDTO> addExpense(@RequestBody ExpensesRequestDTO dto,
+                                                          @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Expenses expenses = ExpensesMapper.toEntity(dto);
         Expenses addedExpense = expensesService.saveExpense(expenses, userPrincipal.getUser());
-        return new ResponseEntity<>(addedExpense, HttpStatus.CREATED);
+        return new ResponseEntity<>(ExpensesMapper.toDto(addedExpense), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Expenses>> getAllExpenses(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<List<ExpensesResponseDTO>> getAllExpenses(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         return ResponseEntity.ok(
                 expensesService.getAllExpenses(userPrincipal.getUser())
+                        .stream()
+                        .map(ExpensesMapper::toDto)
+                        .toList()
         );
     }
 

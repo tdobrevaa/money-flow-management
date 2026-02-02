@@ -7,6 +7,7 @@ import com.mentortheyoung.moneyflow.repositories.ExpensesRepository;
 import com.mentortheyoung.moneyflow.repositories.IncomeRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class ExpensesService {
             throw new IllegalArgumentException("Expense must be greater than 0!");
         }
         expense.setUser(user);
+        expense.setDate(LocalDate.now());
+
         return expensesRepository.save(expense);
     }
 
@@ -39,7 +42,13 @@ public class ExpensesService {
             throw new RuntimeException("You are not allowed to modify this expense");
         }
 
+        if (newExpense.getAmount() <= 0) {
+            throw new IllegalArgumentException("Expense must be greater than 0!");
+        }
         expense.setAmount(newExpense.getAmount());
+        expense.setExpensesCategories(newExpense.getExpensesCategories());
+        expense.setDate(newExpense.getDate());
+
         return expensesRepository.save(expense);
     }
 
@@ -48,19 +57,22 @@ public class ExpensesService {
                 .orElseThrow(() -> new RuntimeException("Expense not found"));
 
         if (!expense.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("You are not allowed to modify this expense");
+            throw new RuntimeException("You are not allowed to modify this expense!");
         }
 
         expensesRepository.delete(expense);
     }
 
     public double calculateBalance(User user) {
-        Income income = incomeRepository.findByUser(user);
+        double totalIncome = incomeRepository.findAllByUser(user)
+                .stream()
+                .mapToDouble(Income::getIncome)
+                .sum();
 
         double totalExpenses = expensesRepository.findAllByUser(user)
                 .stream()
                 .mapToDouble(Expenses::getAmount)
                 .sum();
-        return income.getIncome() - totalExpenses;
+        return totalIncome - totalExpenses;
     }
 }
