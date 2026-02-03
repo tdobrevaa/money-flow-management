@@ -9,6 +9,7 @@ public class ExpensesMapper {
         Expenses expenses = new Expenses();
         expenses.setAmount(dto.getAmount());
         expenses.setExpensesCategories(dto.getExpensesCategories());
+        expenses.setDate(dto.getDate());
         return expenses;
     }
 

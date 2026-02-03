@@ -7,7 +7,6 @@ import com.mentortheyoung.moneyflow.repositories.ExpensesRepository;
 import com.mentortheyoung.moneyflow.repositories.IncomeRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,7 +24,6 @@ public class ExpensesService {
             throw new IllegalArgumentException("Expense must be greater than 0!");
         }
         expense.setUser(user);
-        expense.setDate(LocalDate.now());
 
         return expensesRepository.save(expense);
     }

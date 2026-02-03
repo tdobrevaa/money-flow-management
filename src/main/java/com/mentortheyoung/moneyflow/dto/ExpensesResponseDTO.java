@@ -1,5 +1,6 @@
 package com.mentortheyoung.moneyflow.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mentortheyoung.moneyflow.enums.ExpensesCategories;
 import lombok.Getter;
 import lombok.Setter;
