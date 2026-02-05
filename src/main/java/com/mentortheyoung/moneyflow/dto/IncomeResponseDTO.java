@@ -1,5 +1,6 @@
 package com.mentortheyoung.moneyflow.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mentortheyoung.moneyflow.enums.IncomeCategories;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +15,6 @@ public class IncomeResponseDTO {
     private double targetSavedMoney;
     private IncomeCategories incomeCategories;
     private LocalDate startDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate endDate;
 }

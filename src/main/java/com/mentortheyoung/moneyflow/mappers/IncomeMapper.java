@@ -11,6 +11,7 @@ public class IncomeMapper {
         income.setTargetSavedMoney(dto.getTargetSavedMoney());
         income.setIncomeCategories(dto.getIncomeCategories());
         income.setStartDate(dto.getStartDate());
+        income.setEndDate(dto.getEndDate());
         return income;
     }
 

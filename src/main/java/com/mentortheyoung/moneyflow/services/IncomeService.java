@@ -6,7 +6,6 @@ import com.mentortheyoung.moneyflow.enums.IncomeCategories;
 import com.mentortheyoung.moneyflow.repositories.IncomeRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,16 +28,9 @@ public class IncomeService {
 
         if (income.getIncomeCategories() == IncomeCategories.SALARY) {
             if (income.getStartDate() == null) {
-                throw new IllegalArgumentException("Start date is required for salary!");
+                throw new IllegalArgumentException("Start date is required!");
             }
             income.setEndDate(income.getStartDate().plusMonths(1));
-        }
-
-        else {
-            if (income.getStartDate() == null) {
-                income.setStartDate(LocalDate.now());
-            }
-            income.setEndDate(null);
         }
 
         //savedMoney
@@ -61,7 +53,14 @@ public class IncomeService {
         income.setIncome(newIncome.getIncome());
         income.setTargetSavedMoney(newIncome.getTargetSavedMoney());
         income.setIncomeCategories(newIncome.getIncomeCategories());
+
         income.setStartDate(newIncome.getStartDate());
+        if (income.getIncomeCategories() == IncomeCategories.SALARY) {
+            income.setEndDate(newIncome.getStartDate().plusMonths(1));
+        }
+        else {
+            income.setEndDate(null);
+        }
 
         return incomeRepository.save(income);
     }

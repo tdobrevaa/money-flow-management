@@ -15,4 +15,5 @@ public class IncomeRequestDTO {
     private IncomeCategories incomeCategories;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate startDate;
+    private LocalDate endDate;
 }
