@@ -41,11 +41,12 @@ public class IncomeController {
     }
 
     @PutMapping("/{incomeId}")
-    public ResponseEntity<Income> updateIncome(@PathVariable Integer incomeId,
-                                               @RequestBody Income income,
+    public ResponseEntity<IncomeResponseDTO> updateIncome(@PathVariable Integer incomeId,
+                                               @RequestBody IncomeRequestDTO dto,
                                                @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Income income = IncomeMapper.toEntity(dto);
         Income updatedIncome = incomeService.updateIncome(incomeId, income, userPrincipal.getUser());
-        return new ResponseEntity<>(updatedIncome, HttpStatus.OK);
+        return new ResponseEntity<>(IncomeMapper.toDto(updatedIncome), HttpStatus.OK);
     }
 
     @DeleteMapping("/{incomeId}")

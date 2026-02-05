@@ -41,11 +41,12 @@ public class ExpensesController {
     }
 
     @PutMapping("/{expenseId}")
-    public ResponseEntity<Expenses> updateExpense(@PathVariable Integer expenseId,
-                                                  @RequestBody Expenses expenses,
+    public ResponseEntity<ExpensesResponseDTO> updateExpense(@PathVariable Integer expenseId,
+                                                  @RequestBody ExpensesRequestDTO dto,
                                                   @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Expenses expenses = ExpensesMapper.toEntity(dto);
         Expenses updatedExpense = expensesService.updateExpense(expenseId, expenses, userPrincipal.getUser());
-        return new ResponseEntity<>(updatedExpense, HttpStatus.OK);
+        return new ResponseEntity<>(ExpensesMapper.toDto((updatedExpense)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{expenseId}")
