@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/login.js" defer></script>
 </head>
 <body>
-
+<div class="wrapper">
+    <h1>Login</h1>
+    <p id="error-message"></p>
+    <form id="login-form">
+        <div>
+            <input type="text" name="username" id="username-input" placeholder="Username">
+        </div>
+        <div>
+            <input type="password" name="password" id="password-input" placeholder="Password">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="registration.html">Sign up</a></p>
+</div>
 </body>
 </html>
