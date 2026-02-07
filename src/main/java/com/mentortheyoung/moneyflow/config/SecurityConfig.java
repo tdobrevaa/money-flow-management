@@ -25,7 +25,11 @@ public class SecurityConfig {
                         "/api/auth/login",
                         "/api/auth/register",
                         "/change-password",
-                        "/v3/api-docs/**").permitAll()
+                        "/v3/api-docs/**",
+                        "/login.html",
+                        "/registration.html",
+                        "/js/**",
+                        "/css/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
                 //.httpBasic(Customizer.withDefaults())
