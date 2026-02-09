@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @Table (name = "expenses")
-public class Expenses {
+public class    Expenses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

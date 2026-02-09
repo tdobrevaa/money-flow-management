@@ -5,7 +5,6 @@ public enum ExpensesCategories {
     FOOD,
     TAXI,
     PHARMACY,
-    RESTAURANTS,
     RESTAURANT,
     OTHER
 }

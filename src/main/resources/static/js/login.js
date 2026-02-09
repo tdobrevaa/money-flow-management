@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
             throw new Error('Invalid username or password')
         }
 
-        const data = await response.text()
+        const data = await response.json()
         localStorage.setItem('token', data.token)
         window.location.href = 'add-expense.html'
     }
