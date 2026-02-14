@@ -3,7 +3,7 @@
 html {
     font-family: Montserrat, sans-serif;
     font-size: 12pt;
-    color: black;
+    color: #465a16;
     text-align: center;
 }
 
@@ -38,26 +38,33 @@ form {
     padding: 0 20px;
 }
 
-form input {
+form input,
+form select {
     box-sizing: border-box;
-    flex-grow: 1;
-    min-width: 0;
-    height: 50px;
+    width: 255px;
+    height: 55px;
     padding: 1em;
     font: inherit;
+    color: #465c13;
     border-radius: 10px;
     border: 2px solid white;
     transition:  150ms ease;
     background-color: #f7fff5;
 }
 
-form input:hover {
+form input:hover,
+form select:hover {
     border: 2px solid darkolivegreen;
 }
 
-form input:focus {
+#category-select {
+    cursor: pointer;
+}
+
+form input:focus,
+form select:focus {
     outline: none;
-    border-color: darkolivegreen;
+    border-color: #668137;
     box-shadow: 0 0 0 2px rgba(85,107,47,0.2);
 }
 
@@ -97,15 +104,19 @@ a:hover {
 
 ::placeholder {
     color: #465c13;
-    opacity: 0.8;
 }
 
-form div.incorrect input {
-    color: #c51b1b;
+.incorrect input,
+.incorrect select {
+    border-color: #c51b1b;
 }
 
 #error-message {
     color: #c51b1b;
+}
+
+#success-message {
+    color: #105110;
 }
 
 @media(max-width: 1100px) {

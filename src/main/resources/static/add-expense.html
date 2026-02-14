@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add expense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/add-expense.js" defer></script>
+</head>
+<body>
+<div class="wrapper add-expense">
+    <h1>Add expense</h1>
+    <p id="error-message"></p>
+    <p id="success-message"></p>
+    <form id="add-expense-form">
+        <div>
+            <input type="number" name="amount" id="amount-input" placeholder="Add amount">
+        </div>
+        <div>
+            <select id="category-select">
+                <option value="" disabled selected hidden>Select a category</option>
+                <option value="CLOTHING">Clothing</option>
+                <option value="FOOD">Food</option>
+                <option value="TAXI">Taxi</option>
+                <option value="PHARMACY">Pharmacy</option>
+                <option value="RESTAURANT">Restaurant</option>
+                <option value="OTHER">Other</option>
+            </select>
+        </div>
+        <div>
+            <input id="date-input" name="date" type="date">
+        </div>
+        <button type="submit">Add expense</button>
+    </form>
+</div>
+</body>
+</html>

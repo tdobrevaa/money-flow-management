@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
 
         const data = await response.json()
         localStorage.setItem('token', data.token)
-        window.location.href = 'add-expense.html'
+        window.location.href = 'login.html'
     }
     catch (error) {
         error_message.innerText = error.message
@@ -47,27 +47,27 @@ function getRegisterErrors(firstname, lastname, username, email, password) {
     let errors = []
 
     if (firstname.value === '' || firstname.value == null) {
-        errors.push('First name is required!')
+        errors.push('First name is required.')
         firstname_input.parentElement.classList.add('incorrect')
     }
 
     if (lastname.value === '' || lastname.value == null) {
-        errors.push('Last name is required!')
+        errors.push('Last name is required.')
         lastname_input.parentElement.classList.add('incorrect')
     }
 
     if (username.value === '' || username.value == null) {
-        errors.push('Username is required!')
+        errors.push('Username is required.')
         username_input.parentElement.classList.add('incorrect')
     }
 
     if (email.value === '' || email.value == null) {
-        errors.push('Email is required!')
+        errors.push('Email is required.')
         email_input.parentElement.classList.add('incorrect')
     }
 
     if (password.value === '' || password.value == null) {
-        errors.push('Password is required!')
+        errors.push('Password is required.')
         password.parentElement.classList.add('incorrect')
     }
     else if (password.value.length < 6) {

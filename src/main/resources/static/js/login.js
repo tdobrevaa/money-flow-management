@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
             throw new Error('Invalid username or password')
         }
 
-        const data = await response.text()
+        const data = await response.json()
         localStorage.setItem('token', data.token)
         window.location.href = 'add-expense.html'
     }
@@ -38,12 +38,12 @@ function getLoginErrors(username, password) {
     let errors = [];
 
     if (username.value === '' || username.value == null) {
-        errors.push('Enter your username!')
-        username_input.parentElement.classList.add('incorrect')
+        errors.push('Enter your username.')
+        username.parentElement.classList.add('incorrect')
     }
 
     if (password.value === '' || password.value == null) {
-        errors.push('Enter your password!')
+        errors.push('Enter your password.')
         password.parentElement.classList.add('incorrect')
     }
     return errors

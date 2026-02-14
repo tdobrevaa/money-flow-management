@@ -20,6 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JWTFilter jwtFilter) throws Exception {
         return http
+                .cors(cors -> {})
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("/",
                         "/api/auth/login",
@@ -30,9 +31,9 @@ public class SecurityConfig {
                         "/registration.html",
                         "/js/**",
                         "/css/**").permitAll()
+                        .requestMatchers("/user/expenses").authenticated()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
-                //.httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
