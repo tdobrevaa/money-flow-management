@@ -27,6 +27,72 @@ body {
     justify-content: center;
 }
 
+.expenses-list {
+    width: 500px;
+    background-color: #f7fff5;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-right: 20px;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0f0d9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.edit-icon, .delete-icon {
+    width: 22px;
+    height: auto;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    transform: scale(1.1);
+}
+
+.actions {
+    display: flex;
+    gap: 10px
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #f7fff5;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 h1 {
     font-size: 2.5em;
     font-weight: 800;
@@ -119,6 +185,12 @@ a:hover {
     color: #105110;
 }
 
+.expenses-list {
+    width: 300px;
+    background-color: #f7fff5;
+    padding: 20px;
+    border-radius: 20px;
+}
 @media(max-width: 1100px) {
     .wrapper {
         width: min(600px, 100%);

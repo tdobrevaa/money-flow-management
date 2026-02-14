@@ -7,6 +7,11 @@
     <script type="text/javascript" src="js/add-expense.js" defer></script>
 </head>
 <body>
+<div class="expenses-list" id="expenses-list">
+    <h1>Your expenses</h1>
+    <ul id="expenses-container"></ul>
+</div>
+
 <div class="wrapper add-expense">
     <h1>Add expense</h1>
     <p id="error-message"></p>
@@ -31,6 +36,25 @@
         </div>
         <button type="submit">Add expense</button>
     </form>
+</div>
+<div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Edit expense</h2>
+        <input type="number" id="edit-amount" placeholder="Amount">
+        <select id="edit-category">
+            <option value="CLOTHING">Clothing</option>
+            <option value="FOOD">Food</option>
+            <option value="TAXI">Taxi</option>
+            <option value="PHARMACY">Pharmacy</option>
+            <option value="RESTAURANT">Restaurant</option>
+            <option value="OTHER">Other</option>
+        </select>
+        <input type="date" id="edit-date">
+        <div class="modal-buttons">
+            <button id="save-edit">Save</button>
+            <button id="cancel-edit">Cancel</button>
+        </div>
+    </div>
 </div>
 </body>
 </html>
