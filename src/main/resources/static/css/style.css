@@ -16,13 +16,37 @@ body {
     margin: 0;
 }
 
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #57914b;
+    padding: 10px 20px;
+}
+
+nav a {
+    color: white;
+    font-weight: 600;
+    font-size: 1em;
+    margin: 20px;
+}
+
+nav a:hover {
+    color: #ddf6d9;
+}
+
+.main-layout {
+    margin-top: 70px;
+}
+
 .main-layout {
     display: flex;
     gap: 40px;
     align-items: center;
 }
 
-.expense-wrapper {
+.expense-wrapper,
+.income-wrapper {
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +63,8 @@ body {
     align-self: center;
 }
 
-.expense-header {
+.expense-header,
+.income-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -90,16 +115,22 @@ body {
     transform: translateY(-2px);
 }
 
-.expenses-list {
-    width: 650px;
-    max-height: 450px;
+.expenses-list,
+.income-list {
+    width: 700px;
+    max-height: 400px;
     background-color: #f7fff5;
     padding: 25px 25px 10px ;
     overflow-y: auto;
     border-radius: 10px;
 }
 
-.expense-item {
+.income-list {
+    width: 950px;
+}
+
+.expense-item,
+.income-item {
     display: flex;
     justify-content: space-between;
     background-color: #e0f0d9;
@@ -109,14 +140,16 @@ body {
     font-weight: 500;
 }
 
-.expenses {
+.expenses,
+.income {
     display: flex;
     gap: 60px;
     align-items: center;
     font-size: 1.1em;
 }
 
-.expenses span {
+.expenses span,
+.income span {
     min-width: 120px;
 }
 
@@ -159,7 +192,7 @@ body {
     flex-direction: column;
     gap: 15px;
     width: 300px;
-    height: 350px;
+    height: auto;
 }
 
 .modal-buttons {

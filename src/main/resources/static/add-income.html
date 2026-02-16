@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Expenses</title>
+    <title>Income</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/add-expense.js" defer></script>
+    <script type="text/javascript" src="js/add-income.js" defer></script>
 </head>
 
 <body>
@@ -14,18 +14,16 @@
 </nav>
 
 <div class="main-layout">
-    <div class="expense-wrapper">
-        <div class="expense-header">
-            <h1>Your expenses</h1>
+    <div class="income-wrapper">
+        <div class="income-header">
+            <h1>Your income</h1>
             <div class="filter">
                 <!--<div id="category-filter">
                     <select>
                         <option value="" disabled selected hidden>Select category</option>
-                        <option value="CLOTHING">Clothing</option>
-                        <option value="FOOD">Food</option>
-                        <option value="TAXI">Taxi</option>
-                        <option value="PHARMACY">Pharmacy</option>
-                        <option value="RESTAURANT">Restaurant</option>
+                        <option value="SALARY">Salary</option>
+                        <option value="BONUS">Bonus</option>
+                        <option value="FREELANCE">Freelance</option>
                         <option value="OTHER">Other</option>
                     </select>
                 </div> -->
@@ -39,8 +37,8 @@
             </div>
         </div>
 
-        <div class="expenses-list" id="expenses-list">
-            <ul id="expenses-container"></ul>
+        <div class="income-list" id="income-list">
+            <ul id="income-container"></ul>
         </div>
         <div id="edit-modal" class="modal hidden">
             <div class="modal-content">
@@ -50,17 +48,21 @@
                         <input type="number" id="edit-amount" placeholder="Amount">
                     </div>
                     <div>
+                        <input type="number" id="edit-target" placeholder="Target">
+                    </div>
+                    <div>
                         <select id="edit-category">
-                            <option value="CLOTHING">Clothing</option>
-                            <option value="FOOD">Food</option>
-                            <option value="TAXI">Taxi</option>
-                            <option value="PHARMACY">Pharmacy</option>
-                            <option value="RESTAURANT">Restaurant</option>
+                            <option value="SALARY">Salary</option>
+                            <option value="BONUS">Bonus</option>
+                            <option value="FREELANCE">Freelance</option>
                             <option value="OTHER">Other</option>
                         </select>
                     </div>
                     <div>
-                        <input type="date" id="edit-date">
+                        <input type="date" id="edit-start-date">
+                    </div>
+                    <div>
+                        <input type="date" id="edit-end-date">
                     </div>
                     <div class="modal-buttons">
                         <button id="save-edit">Save</button>
@@ -71,29 +73,33 @@
         </div>
     </div>
 
-    <div class="wrapper add-expense">
-        <h1>Add expense</h1>
+    <div class="wrapper add-income">
+        <h1>Add income</h1>
         <p id="error-message"></p>
         <p id="success-message"></p>
-        <form id="add-expense-form">
+        <form id="add-income-form">
             <div>
-                <input type="number" name="amount" id="amount-input" placeholder="Add amount">
+                <input type="number" name="income" id="income-input" placeholder="Add income">
+            </div>
+            <div>
+                <input type="number" name="target" id="target-input" placeholder="Add saved money target">
             </div>
             <div>
                 <select id="category-select">
                     <option value="" disabled selected hidden>Select category</option>
-                    <option value="CLOTHING">Clothing</option>
-                    <option value="FOOD">Food</option>
-                    <option value="TAXI">Taxi</option>
-                    <option value="PHARMACY">Pharmacy</option>
-                    <option value="RESTAURANT">Restaurant</option>
+                    <option value="SALARY">Salary</option>
+                    <option value="BONUS">Bonus</option>
+                    <option value="FREELANCE">Freelance</option>
                     <option value="OTHER">Other</option>
                 </select>
             </div>
             <div>
-                <input id="date-input" name="date" type="date">
+                <input id="start-date-input" name="start-date" type="date">
             </div>
-            <button type="submit">Add expense</button>
+            <div>
+                <input id="end-date-input" name="end-date" type="date">
+            </div>
+            <button type="submit">Add income</button>
         </form>
     </div>
 </div>
