@@ -171,12 +171,14 @@ async function deleteExpense(id) {
 function showExpenses(expenses) {
     expensesList.innerHTML = ''
 
-    expenses.forEach(expense => {
+    expenses
+        .sort((a,b) => b.id - a.id)
+        .forEach(expense => {
         const li = document.createElement('li')
         li.classList.add('expense-item')
 
         li.innerHTML = `<div class="expenses">
-                         <span>${expense.amount} €</span>
+                         <span>${expense.amount.toFixed(2)} €</span>
                          <span>${expense.category}</span>
                          <span>${expense.date}</span>
                          </div>
