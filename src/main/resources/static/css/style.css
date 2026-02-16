@@ -27,13 +27,24 @@ body {
     justify-content: center;
 }
 
+.expense-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.date-filter {
+    display: flex;
+}
+
 .expenses-list {
-    width: 500px;
+    width: 1000px;
     background-color: #f7fff5;
     padding: 20px;
-    border-radius: 10px;
-    max-height: 500px;
+    max-height: 450px;
     overflow-y: auto;
+    border-radius: 10px;
     margin-right: 20px;
 }
 
@@ -79,18 +90,27 @@ body {
 }
 
 .modal-content {
-    background: #f7fff5;
+    background: #e3efd5;
     padding: 30px;
     border-radius: 20px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 15px;
     width: 300px;
+    height: 350px;
 }
 
 .modal-buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 45px;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.modal-buttons button {
+    padding: 8px 30px;
+    border-radius: 7px;
 }
 
 h1 {
@@ -123,7 +143,14 @@ form select:hover {
     border: 2px solid darkolivegreen;
 }
 
-#category-select {
+#edit-amount,
+#edit-category,
+#edit-date {
+    background-color: #f8fbf1;
+}
+
+#category-select,
+#edit-category {
     cursor: pointer;
 }
 

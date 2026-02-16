@@ -15,6 +15,6 @@ public class ExpensesResponseDTO {
     private double amount;
     @JsonProperty("category")
     private ExpensesCategories expensesCategories;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate date;
 }
