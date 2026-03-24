@@ -13,4 +13,5 @@ public class MonthlyDashboardDTO {
     private double totalSpent;
     private double totalSaved;
     private List<CategoryTotalDTO> topCategories;
+    private List<CategoryTotalDTO> allCategories;
 }

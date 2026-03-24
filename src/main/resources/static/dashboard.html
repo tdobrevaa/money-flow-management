@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="add-expense.html">Expenses</a>
+            <a href="add-income.html">Income</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <h1>Monthly Dashboard</h1>
+        <div class="month-navigation">
+            <button id="prev-month">◀</button>
+            <h2 id="current-month"></h2>
+            <button id="next-month">▶</button>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Total Spent</h3>
+                <p id="total-spent">0 €</p>
+            </div>
+            <div class="card">
+                <h3>Total Saved</h3>
+                <p id="total-saved">0 €</p>
+            </div>
+        </div>
+
+        <div class="charts-row">
+            <div class="chart-box">
+                <canvas id="chart-spent-line"></canvas>
+            </div>
+            <div class="chart-box">
+                <canvas id="chart-saved-line"></canvas>
+            </div>
+        </div>
+
+        <div class="charts-row">
+            <div class="chart-box">
+                <canvas id="chart-pie"></canvas>
+            </div>
+            <div class="chart-box">
+                <canvas id="chart-bar"></canvas>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

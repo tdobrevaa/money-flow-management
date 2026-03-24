@@ -249,13 +249,13 @@ function parseDate(dateStr) {
 }
 
 filterBtn.addEventListener('click', () => {
-    const start = new Date(startDateInput.value)
-    const end = new Date(endDateInput.value)
-
     if (startDateInput.value === '' || endDateInput.value === '') {
         errorMessage.innerText = 'Select both dates'
         return
     }
+
+    const start = new Date(startDateInput.value)
+    const end = new Date(endDateInput.value)
 
     const filtered = expensesData.filter(exp => {
         const expenseDate = parseDate(exp.date)

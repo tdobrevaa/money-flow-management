@@ -22,7 +22,7 @@ public interface ExpensesRepository extends JpaRepository<Expenses, Integer> {
         AND YEAR(expenses.date) = :year
         """)
 
-    double getTotalSpent(User user, int month, int year);
+    Double getTotalSpent(User user, int month, int year);
 
     @Query("""
         SELECT new com.mentortheyoung.moneyflow.dto.CategoryTotalDTO(expenses.expensesCategories, SUM (expenses.amount))

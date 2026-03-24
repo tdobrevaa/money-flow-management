@@ -300,6 +300,11 @@ function parseDate(dateStr) {
 }
 
 filterBtn.addEventListener('click', () => {
+    if (startDateInput.value === '' || endDateInput.value === '') {
+        errorMessage.innerText = 'Select both dates'
+        return
+    }
+
     const start = new Date(startDateInput.value)
     const end = new Date(endDateInput.value)
 

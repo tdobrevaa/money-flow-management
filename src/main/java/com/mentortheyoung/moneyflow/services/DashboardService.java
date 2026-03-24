@@ -20,14 +20,21 @@ public class DashboardService {
     }
 
     public MonthlyDashboardDTO getMonthlyDashboard(User user, int month, int year) {
-        double totalSpent = expensesRepository.getTotalSpent(user, month, year);
-        double totalSaved = incomeRepository.getTotalSaved(user, month, year);
+        Double totalSpent = expensesRepository.getTotalSpent(user, month, year);
+        Double totalSaved = incomeRepository.getTotalSaved(user, month, year);
 
-        List<CategoryTotalDTO> topCategories = expensesRepository.getTopCategories(user, month, year)
+        List<CategoryTotalDTO> allCategories = expensesRepository.getTopCategories(user, month, year);
+
+        List<CategoryTotalDTO> topCategories = allCategories
                 .stream()
                 .limit(3)
                 .toList();
 
-        return new MonthlyDashboardDTO(totalSpent, totalSaved, topCategories);
+        return new MonthlyDashboardDTO(
+                totalSpent != null ? totalSpent : 0.0,
+                totalSaved != null ? totalSaved : 0.0,
+                topCategories,
+                allCategories
+        );
     }
 }

@@ -19,5 +19,5 @@ public interface IncomeRepository extends JpaRepository<Income, Integer> {
         AND MONTH(income.startDate) = :month
         AND YEAR(income.startDate) = :year
         """)
-    double getTotalSaved(User user, int month, int year);
+    Double getTotalSaved(User user, int month, int year);
 }
