@@ -27,7 +27,7 @@ form.addEventListener('submit', async (e) => {
 
         const data = await response.json()
         localStorage.setItem('token', data.token)
-        window.location.href = 'add-expense.html'
+        window.location.href = 'dashboard.html'
     }
     catch (error) {
     error_message.innerText = error.message
