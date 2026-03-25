@@ -30,7 +30,13 @@ public class IncomeService {
             if (income.getStartDate() == null) {
                 throw new IllegalArgumentException("Start date is required!");
             }
-            income.setEndDate(income.getStartDate().plusMonths(1));
+
+            if (income.getEndDate() == null) {
+                income.setEndDate(income.getStartDate().plusMonths(1));
+            }
+        }
+        else {
+            income.setEndDate(null);
         }
 
         //savedMoney
@@ -56,7 +62,12 @@ public class IncomeService {
 
         income.setStartDate(newIncome.getStartDate());
         if (income.getIncomeCategories() == IncomeCategories.SALARY) {
-            income.setEndDate(newIncome.getStartDate().plusMonths(1));
+            if (newIncome.getEndDate() == null) {
+                income.setEndDate(newIncome.getStartDate().plusMonths(1));
+            }
+            else {
+                income.setEndDate(newIncome.getEndDate());
+            }
         }
         else {
             income.setEndDate(null);
