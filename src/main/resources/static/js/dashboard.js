@@ -1,8 +1,10 @@
 const token = localStorage.getItem('token')
+if (!token) window.location.href = 'login.html'
 
 let currentDate = new Date()
 let charts = {}
 
+const error_message = document.getElementById('error-message')
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 const categoryColors = {
@@ -36,6 +38,11 @@ async function fetchDashboard(month, year) {
             }
         }
     )
+
+    if (!response.ok) {
+        throw new Error(`Error ${response.status}`)
+    }
+
     return response.json()
 }
 
@@ -48,17 +55,19 @@ async function loadDashboard() {
     try {
         const current = await fetchDashboard(month, year)
 
-        const trend = await Promise.all(
-            Array.from({ length: 6 }, async (_, i) => {
-                const d = new Date(year, month - 1 - (5 - i))
-                const data = await fetchDashboard(d.getMonth() + 1, d.getFullYear())
-                return {
-                    label: monthNames[d.getMonth()].substring(0, 3),
-                    spent: data.totalSpent || 0,
-                    saved: data.totalSaved || 0
-                }
+        const trend = []
+
+        for (let i = 5; i >=0; i--) {
+            const d = new Date(year, month - 1 - i)
+
+            const data = await fetchDashboard(d.getMonth() + 1, d.getFullYear())
+
+            trend.push({
+                label: monthNames[d.getMonth()].substring(0, 3),
+                spent: data.totalSpent || 0,
+                saved: data.totalSaved || 0
             })
-        )
+        }
 
         updateSummary(current)
         renderLine('chart-spent-line', 'Monthly Spending (€)', trend, 'spent', '#c0392b', 'rgba(192,57,43,0.12)')
