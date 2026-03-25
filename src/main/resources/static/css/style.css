@@ -16,6 +16,17 @@ body {
     margin: 0;
 }
 
+.main-layout {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.expense-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .wrapper {
     background-color: #a4e399;
     width: 350px;
@@ -25,6 +36,142 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    align-self: center;
+}
+
+.expense-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.filter {
+    display: flex;
+    gap: 10px;
+}
+
+.filter select,
+.filter input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font: inherit;
+}
+
+.btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    font: inherit;
+}
+
+.filter-btn {
+    background-color: darkolivegreen;
+    color: white;
+    margin-left: 25px;
+}
+
+.filter-btn:hover {
+    background-color: #5a7226;
+    transform: translateY(-2px);
+}
+
+.reset-btn {
+    background-color: white;
+    color: darkolivegreen;
+    margin-left: 10px;
+}
+
+.reset-btn:hover {
+    background-color: #c7ddbd;
+    transform: translateY(-2px);
+}
+
+.expenses-list {
+    width: 650px;
+    max-height: 450px;
+    background-color: #f7fff5;
+    padding: 25px 25px 10px ;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0f0d9;
+    padding: 20px 30px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.expenses {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.expenses span {
+    min-width: 120px;
+}
+
+.edit-icon, .delete-icon {
+    width: 22px;
+    height: auto;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    transform: scale(1.1);
+}
+
+.actions {
+    display: flex;
+    gap: 10px
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #e3efd5;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    height: 350px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 45px;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.modal-buttons button {
+    padding: 8px 30px;
+    border-radius: 7px;
 }
 
 h1 {
@@ -57,7 +204,15 @@ form select:hover {
     border: 2px solid darkolivegreen;
 }
 
-#category-select {
+#edit-amount,
+#edit-category,
+#edit-date {
+    background-color: #f8fbf1;
+}
+
+#category-select,
+#edit-category,
+.filter select:hover {
     cursor: pointer;
 }
 
